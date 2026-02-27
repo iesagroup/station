@@ -5,3 +5,6 @@ sqlalchemy
 asyncpg
 jinja2
 httpx
+alembic
+psycopg2-binary
+requests

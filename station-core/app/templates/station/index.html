@@ -1,0 +1,58 @@
+{% extends "station/base_station.html" %}
+
+{% block content %}
+
+<div class="container-fluid station-container">
+
+    {% if tasks|length == 0 %}
+        <div class="alert alert-secondary fs-5">
+            Нет заданий в очереди
+        </div>
+    {% endif %}
+
+    {% for task in tasks %}
+
+    <div class="card station-card mb-4 p-4">
+
+        <div class="row align-items-center">
+
+            <div class="col-8">
+
+                <h3 class="fw-bold mb-2">
+                    {{ task.product_name }}
+                </h3>
+
+                <div class="text-muted mb-2">
+                    GTIN: {{ task.gtin }}
+                </div>
+
+                <div class="fs-5">
+                    {{ task.quantity_in_box }} коробов
+                </div>
+
+                <div class="text-muted">
+                    ({{ task.planned_quantity }} шт
+                    {% if task.quantity_in_pallet %}
+                        • {{ task.quantity_in_pallet }} паллета
+                    {% endif %})
+                </div>
+
+            </div>
+
+            <div class="col-4 text-end">
+
+                <button class="btn btn-primary btn-lg station-btn">
+                    НАЧАТЬ
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -25,6 +25,8 @@ services:
       - station-db
     ports:
       - "8085:8000"
+    volumes:
+      - ./station-core:/app
     networks:
       - station-net
 
