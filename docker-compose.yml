@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  station-db:
+    image: postgres:15-alpine
+    container_name: station-db
+    restart: always
+    environment:
+      POSTGRES_DB: station
+      POSTGRES_USER: station
+      POSTGRES_PASSWORD: station123
+    volumes:
+      - station_db_data:/var/lib/postgresql/data
+    networks:
+      - station-net
+
+  station-core:
+    build: ./station-core
+    container_name: station-core
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - station-db
+    ports:
+      - "8085:8000"
+    networks:
+      - station-net
+
+volumes:
+  station_db_data:
+
+networks:
+  station-net:
+    driver: bridge
