@@ -2,51 +2,70 @@
 
 {% block content %}
 
-<div class="container-fluid station-container">
+<div class="station-list">
 
     {% if tasks|length == 0 %}
         <div class="alert alert-secondary fs-5">
-            Нет заданий в очереди
+            Нет заданий
         </div>
     {% endif %}
 
     {% for task in tasks %}
 
-    <div class="card station-card mb-4 p-4">
+    {# расчет коробов #}
+    {% set boxes = task.planned_quantity // task.quantity_in_box %}
 
-        <div class="row align-items-center">
+    <div class="station-card-row">
 
-            <div class="col-8">
+        <!-- ЛЕВАЯ ЧАСТЬ -->
+      <div class="station-card-info">
 
-                <h3 class="fw-bold mb-2">
-                    {{ task.product_name }}
-                </h3>
+    <div class="station-product-name">
+        {{ task.product_name }}
+    </div>
 
-                <div class="text-muted mb-2">
-                    GTIN: {{ task.gtin }}
-                </div>
+    <div class="station-product-gtin">
+        GTIN {{ task.gtin }}
+    </div>
 
-                <div class="fs-5">
-                    {{ task.quantity_in_box }} коробов
-                </div>
+    {% if task.production_date_str and task.expiry_date_str %}
+    <div class="station-date-badge">
+        <span class="date-prod">
+            {{ task.production_date_str }}
+        </span>
 
-                <div class="text-muted">
-                    ({{ task.planned_quantity }} шт
-                    {% if task.quantity_in_pallet %}
-                        • {{ task.quantity_in_pallet }} паллета
-                    {% endif %})
-                </div>
+        <span class="date-arrow">→</span>
 
+        <span class="date-exp">
+            {{ task.expiry_date_str }}
+        </span>
+    </div>
+    {% endif %}
+
+</div>
+
+        <!-- ЦЕНТР -->
+        <div class="station-card-volume">
+            <div class="station-volume-boxes">
+                {{ boxes }}
+            </div>
+            <div class="station-volume-label">
+                коробов
             </div>
 
-            <div class="col-4 text-end">
-
-                <button class="btn btn-primary btn-lg station-btn">
-                    НАЧАТЬ
-                </button>
-
+            <div class="station-volume-secondary">
+                {{ task.planned_quantity }} шт
+                {% if task.quantity_in_pallet %}
+                    • {{ task.quantity_in_pallet }} паллета
+                {% endif %}
             </div>
+        </div>
 
+        <!-- ПРАВАЯ ЧАСТЬ -->
+        <div class="station-card-action">
+            <button class="station-main-btn">
+                НАЧАТЬ
+            </button>
         </div>
 
     </div>

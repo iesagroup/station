@@ -2,28 +2,104 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>{% block title %}TrackLine - Станция{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}TrackLine Station{% endblock %}</title>
 
-  <!-- Favicons -->
-  <link href="{{ url_for('static', path='assets/img/favicon.png') }}" rel="icon">
-  <link href="{{ url_for('static', path='assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Nunito|Poppins" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
+  <!-- Vendor CSS -->
   <link href="{{ url_for('static', path='assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ url_for('static', path='assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
+  <!-- Nice Admin Main CSS -->
   <link href="{{ url_for('static', path='assets/css/style.css') }}" rel="stylesheet">
 
-  <!-- Station CSS -->
+  <!-- Station Custom CSS -->
   <link href="{{ url_for('static', path='css/station.css') }}" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f4f7fc;
+    }
+  </style>
 </head>
 
-<body class="station-body">
-  {% block content %}{% endblock %}
+<body>
 
-  <!-- Vendor JS Files -->
-  <script src="{{ url_for('static', path='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- ===== HEADER ===== -->
+<header class="header fixed-top d-flex align-items-center px-4"
+        style="height:80px; background:#3a4b61; border-bottom:1px solid #2e3d52; z-index:1000;">
+
+  <div class="d-flex align-items-center">
+
+    <img src="{{ url_for('static', path='assets/img/logo.png') }}"
+         alt="ТрекЛайн"
+         height="42">
+
+    <span class="ms-3 fw-bold fs-4 text-white">
+        ТрекЛайн
+    </span>
+
+    <span class="ms-4 px-3 py-1 rounded-pill"
+          style="background:#4b5f78; font-size:16px; font-weight:600; color:#ffffff;">
+        Станция {{ station_code }}
+    </span>
+
+  </div>
+
+  <div class="ms-auto d-flex flex-column align-items-center text-white"
+     style="min-width:200px; gap:6px; padding-top:4px;">
+
+    <div class="fw-bold" style="font-size:36px; line-height:1;" id="clock">
+        --:--
+    </div>
+
+    <div style="font-size:15px; opacity:0.85; line-height:1.2;" id="date">
+        --
+    </div>
+
+</div>
+
+</header>
+<!-- ===== END HEADER ===== -->
+
+
+<!-- ===== MAIN CONTENT ===== -->
+<main style="padding-top: 90px; padding-left: 30px; padding-right: 30px;">
+    {% block content %}{% endblock %}
+</main>
+<!-- ===== END MAIN ===== -->
+
+
+<!-- Vendor JS -->
+<script src="{{ url_for('static', path='assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+<!-- Clock Script -->
+<script>
+function updateDateTime() {
+    const now = new Date();
+
+    const time = now.toLocaleTimeString('ru-RU', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+
+    const date = now.toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    });
+
+    document.getElementById("clock").innerText = time;
+    document.getElementById("date").innerText = date;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime();
+</script>
+
+{% block extra_js %}{% endblock %}
+
 </body>
 </html>

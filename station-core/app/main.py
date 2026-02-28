@@ -10,6 +10,7 @@ import asyncio
 from app.database import AsyncSessionLocal
 from app.models import StationTask
 from app.services.task_sync import sync_tasks
+from app.config import STATION_CODE
 
 
 app = FastAPI()
@@ -23,7 +24,7 @@ app.mount("/static", StaticFiles(directory="app/static"), name="static")
 # TEMPLATES
 # -----------------------------
 templates = Jinja2Templates(directory="app/templates")
-
+templates.env.globals["station_code"] = STATION_CODE
 
 # -----------------------------
 # DB dependency

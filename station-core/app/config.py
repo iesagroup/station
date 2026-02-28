@@ -2,4 +2,4 @@ import os
 
 CENTRAL_API_URL = os.getenv("CENTRAL_API_URL")
 CENTRAL_API_TOKEN = os.getenv("CENTRAL_API_TOKEN")
-STATION_CODE = os.getenv("STATION_CODE")
+STATION_CODE = os.getenv("STATION_CODE", "UNKNOWN")

@@ -1,0 +1,135 @@
+body {
+    background-color: #eef2f7;
+}
+
+/* ===============================
+   Список карточек
+================================= */
+
+.station-list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* ===============================
+   Карточка задания
+================================= */
+
+.station-card-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 30px 36px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.05);
+}
+
+/* ===============================
+   Левая часть (информация)
+================================= */
+
+.station-card-info {
+    flex: 2;
+}
+
+.station-product-name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    line-height: 1.3;
+    color: #1c2b3a;
+}
+
+.station-product-gtin {
+    font-size: 14px;
+    color: #7d8b99;
+    margin-bottom: 8px;
+}
+
+/* =================================
+   ЖИВАЯ ПЛАШКА ДАТ
+================================= */
+
+.station-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 16px;
+    margin-top: 6px;
+    border-radius: 12px;
+    background: #e8f1ff;
+    border: 1px solid #cfe0ff;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1c2b3a;
+}
+
+.date-prod {
+    opacity: 0.75;
+}
+
+.date-arrow {
+    font-weight: 700;
+    color: #2f80ed;
+}
+
+.date-exp {
+    font-weight: 700;
+    color: #1f6fd6;
+}
+
+/* ===============================
+   Центральная часть (объём)
+================================= */
+
+.station-card-volume {
+    flex: 1;
+    text-align: center;
+}
+
+.station-volume-boxes {
+    font-size: 46px;
+    font-weight: 800;
+    line-height: 1;
+    color: #0f172a;
+}
+
+.station-volume-label {
+    font-size: 16px;
+    color: #6b7b8d;
+    margin-top: 4px;
+    margin-bottom: 6px;
+}
+
+.station-volume-secondary {
+    font-size: 15px;
+    color: #8896a5;
+}
+
+/* ===============================
+   Правая часть (кнопка)
+================================= */
+
+.station-card-action {
+    flex: 1;
+    text-align: right;
+}
+
+.station-main-btn {
+    height: 92px;
+    min-width: 180px;
+    padding: 0 24px;
+    font-size: 22px;
+    font-weight: 700;
+    border-radius: 8px;
+    border: none;
+    background: #2f80ed;
+    color: #ffffff;
+    transition: background 0.15s ease;
+}
+
+.station-main-btn:active {
+    background: #1f6fd6;
+}
